@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
   <remote name="mine"
-          fetch="https://github.com/Chelista2/"
-          revision="lineage-24.0" />
+          fetch="https://github.com/Chelista2/" />
 
-  <!-- Device & Vendor Trees (zuerst mit i928-Forks starten und auf A17 anpassen) -->
+  <!-- Zuerst die Original-LineageOS-Version dieser Ordner abbestellen -->
+  <remove-project name="LineageOS/android_device_google_crosshatch" />
+  <remove-project name="LineageOS/android_kernel_google_msm-4.9" />
+  <remove-project name="LineageOS/android_frameworks_base" />
+
+  <!-- Deine 4 geforkten Repos von Chelista2 laden -->
   <project path="device/google/crosshatch"
            name="android_device_google_crosshatch"
-           remote="mine" />
+           remote="mine"
+           revision="lineage-23.2" />
   <project path="vendor/google/crosshatch"
            name="proprietary_vendor_google_crosshatch"
-           remote="mine" />
-
-  <!-- Kernel 4.9 von i928 -->
+           remote="mine"
+           revision="lineage-23.2" />
   <project path="kernel/google/msm-4.9"
            name="android_kernel_google_msm-4.9"
-           remote="mine" />
-
-  <!-- Gepatchte System-Repos für den 4.9-Kernel -->
-  <project path="packages/modules/Connectivity"
-           name="android_packages_modules_Connectivity"
-           remote="mine" />
-  <project path="bionic"
-           name="android_bionic"
-           remote="mine" />
-  <project path="system/memory/libmeminfo"
-           name="android_system_memory_libmeminfo"
-           remote="mine" />
+           remote="mine"
+           revision="lineage-23.2" />
+  <project path="frameworks/base"
+           name="android_frameworks_base"
+           remote="mine"
+           revision="lineage-23.2" />
 </manifest>
