@@ -3,24 +3,22 @@
   <remote name="mine"
           fetch="https://github.com/Chelista2/" />
 
-  <!-- Zuerst die Original-LineageOS-Version dieser Ordner abbestellen -->
   <remove-project name="LineageOS/android_device_google_crosshatch" />
   <remove-project name="LineageOS/android_kernel_google_msm-4.9" />
   <remove-project name="LineageOS/android_frameworks_base" />
 
-  <!-- Deine 4 geforkten Repos von Chelista2 laden -->
   <project path="device/google/crosshatch"
            name="android_device_google_crosshatch"
            remote="mine"
-           revision="lineage-23.2" />
+           revision="lineage-23.0" />
   <project path="vendor/google/crosshatch"
            name="proprietary_vendor_google_crosshatch"
            remote="mine"
-           revision="lineage-23.2" />
+           revision="lineage-22.2" />
   <project path="kernel/google/msm-4.9"
            name="android_kernel_google_msm-4.9"
            remote="mine"
-           revision="lineage-23.2" />
+           revision="a16" />
   <project path="frameworks/base"
            name="android_frameworks_base"
            remote="mine"
