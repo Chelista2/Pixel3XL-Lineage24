@@ -1,0 +1,50 @@
+name: Build LineageOS 24.0 for crosshatch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Free up disk space
+        run: |
+          df -h
+          sudo rm -rf /usr/share/dotnet /opt/ghc /opt/hostedtoolcache /usr/local/lib/android /etc/skel
+          docker system prune -af --volumes || true
+          df -h
+
+      - name: Install build tools and repo
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            bc bison build-essential ccache curl flex g++-multilib gcc-multilib \
+            git git-lfs gnupg gperf imagemagick lib32ncurses-dev lib32z1-dev \
+            libelf-dev liblz4-tool libsdl1.2-dev libssl-dev libxml2 libxml2-utils \
+            lzop pngquant python3 python3-pip rsync schedtool squashfs-tools \
+            unzip xsltproc zip zlib1g-dev
+          mkdir -p ~/bin
+          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+          chmod a+rx ~/bin/repo
+          echo "$HOME/bin" >> $GITHUB_PATH
+
+      - name: Initialize and sync LineageOS 24.0
+        run: |
+          mkdir -p ~/android/lineage
+          cd ~/android/lineage
+          git config --global user.name "Chelista2"
+          git config --global user.email "chelista2@users.noreply.github.com"
+          repo init -u https://github.com/LineageOS/android.git -b lineage-24.0 --depth=1 --git-lfs
+          mkdir -p .repo/local_manifests
+          cp "${{ github.workspace }}/local_manifests/crosshatch.xml" .repo/local_manifests/crosshatch.xml
+          repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
+
+      - name: Build crosshatch
+        run: |
+          cd ~/android/lineage
+          export USE_CCACHE=1
+          export CCACHE_EXEC=/usr/bin/ccache
+          ccache -M 10G
+          source build/envsetup.sh
+          lunch lineage_crosshatch-userdebug
+          mka bacon
