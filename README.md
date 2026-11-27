@@ -58,7 +58,7 @@
 
 ## 🚀 Installation Guide
 
-> **⚠️ Disclaimer:** Flashing custom ROMs carries inherent risks. Back up all your important data before proceeding. We are not responsible for bricked devices or lost data.
+> **⚠️ Disclaimer:** Flashing custom ROMs carries inherent risks. Back up all your important data before proceeding. We are not responsible for bricked devices, lost data, your death, your house burning down or atomic wars.
 
 ### Prerequisites
 * Unlocked Bootloader
