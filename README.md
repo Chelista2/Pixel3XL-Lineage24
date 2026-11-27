@@ -172,8 +172,6 @@ Go to **Install**, select the `lineage-24.0-XXXXXXXX-UNOFFICIAL-crosshatch.zip` 
 
 ## 🙏 Credits & Acknowledgements
 
-
-
 **[LineageOS Team](https://lineageos.org/)** for the incredible ROM base.
 **Google** for kernel sources and device blobs.
 Everyone contributing to `sdm845` and `crosshatch` development.
