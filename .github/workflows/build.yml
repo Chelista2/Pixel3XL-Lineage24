@@ -48,10 +48,9 @@ jobs:
       - name: Build crosshatch
         run: |
           cd /mnt/android/lineage
-          export USE_CCACHE=1
-          export CCACHE_DIR=/mnt/android/ccache
-          export CCACHE_EXEC=/usr/bin/ccache
-          ccache -M 10G
+          export USE_CCACHE=0
           source build/envsetup.sh
           lunch lineage_crosshatch-userdebug
-          mka bacon
+          mka bootimage
+          mka vendorimage
+          df -h
