@@ -5,7 +5,7 @@
 [![LineageOS](https://img.shields.io/badge/LineageOS-24.0-167C80?style=for-the-badge&logo=lineageos&logoColor=white)](https://lineageos.org/)
 [![Android](https://img.shields.io/badge/Android-17-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
 [![Device](https://img.shields.io/badge/Device-Google%20Pixel%203%20XL-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://wiki.lineageos.org/devices/crosshatch/)
-![Status](https://img.shields.io/badge/Status-Still%20in%20Work%20%7C%20Not%20for%20Download-red?style=for-the-badge)   
+[![Status](https://img.shields.io/badge/Status-Still%20in%20Work%20%7C%20Not%20for%20Download-red?style=for-the-badge)](https://img.shields.io/badge/Why_did_you_click_that%3F-Don't_be_so_impatient_--_it_literally_says_not_for_download!-blueviolet?style=for-the-badge "Why did you click that? Don't be so impatient!")
 **Unofficial LineageOS 24.0 builds & device resources for the Google Pixel 3 XL (`crosshatch`).**
 
 [📥 Downloads](../../releases) • [🐛 Report a Bug](../../issues) • [💬 Discussions](../../discussions)
