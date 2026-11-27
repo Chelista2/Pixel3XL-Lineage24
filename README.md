@@ -35,4 +35,47 @@
 | **Battery** | 3430 mAh Li-Po (now includes complimentary 18% spicy pillow energy) |
 
 </td>
-    <td align="center" valign
+    <td align="center" valign="middle" width="260">
+      <img src="https://wiki.lineageos.org/images/devices/crosshatch.png" alt="Google Pixel 3 XL" width="210" />
+    </td>
+  </tr>
+</table>
+
+---
+
+## ⚙️ Current Status
+
+| Component | Status | Notes |
+| :--- | :---: | :--- |
+| **Boot / System** | ⚠️ | untested / still in Work — either boots into Android 17 or summons a demon |
+| **Display & Touch** | ⚠️ | untested / still in Work — touch may respond to telepathy only |
+| **Wi-Fi & Bluetooth** | ⚠️ | untested / still in Work — pairs exclusively with haunted smart fridges |
+| **RIL (Calls / SMS / Data)** | ⚠️ | untested / still in Work — emergency calls only (including 911 for your sanity) |
+| **Camera (Front / Back)** | ⚠️ | untested / still in Work — front cam captures existential dread in 4K |
+| **Audio & Speakers** | ⚠️ | untested / still in Work — plays Enigma at max volume on boot |
+| **Fingerprint Sensor** | ⚠️ | untested / still in Work — unlocks if you whisper "please" |
+| **NFC / Google Pay** | ⚠️ | untested / still in Work — pays with hopes, dreams, and lint |
+| **SELinux** | ⚠️ | untested / still in Work — currently negotiating a ceasefire |
+
+---
+
+## 🚀 Installation Guide
+
+> **⚠️ Disclaimer:** Flashing custom ROMs carries inherent risks. Back up all your important data before proceeding. We are not responsible for bricked devices, lost data, your death, your house burning down, atomic wars, sudden spontaneous combustion of your toaster, or the heat death of the universe.
+
+### Prerequisites
+- Unlocked Bootloader (if it's carrier-locked, go cry in a corner)
+- Latest `adb` and `fastboot` tools installed on your PC (not a version from 2014 found on a sketchy forum)
+- ROM `.zip` (and `boot.img` / `twrp.img`) from the [Releases](../../releases) page (spoiler: they aren't there yet)
+- The phone itself
+- Usb cable (ideally one that doesn't disconnect if a cat sneezes nearby)
+- A brain (obviously)
+- Emotional resilience for bootloops
+
+---
+
+### Method 1: LineageOS Recovery (ADB Sideload)
+
+1. **Reboot into Bootloader:**
+   ```bash
+   adb reboot bootloader
