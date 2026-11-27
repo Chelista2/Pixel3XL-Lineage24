@@ -42,7 +42,7 @@ jobs:
           repo init -u https://github.com/LineageOS/android.git -b lineage-24.0 --depth=1 --git-lfs
           mkdir -p .repo/local_manifests
           cp "${{ github.workspace }}/local_manifests/crosshatch.xml" .repo/local_manifests/crosshatch.xml
-          repo sync -c -j4 --force-sync --no-clone-bundle --no-tags --optimized-fetch
+          repo sync -c -j2 --force-sync --no-clone-bundle --no-tags --optimized-fetch
           rm -rf .repo
           df -h
 
