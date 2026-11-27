@@ -52,7 +52,7 @@
 ### Prerequisites
 * Unlocked Bootloader
 * Latest `adb` and `fastboot` tools installed on your PC
-* LineageOS Recovery (`boot.img` / `vendor_boot.img`) & ROM `.zip` from the [Releases](../../releases) page
+* LineageOS Recovery (`boot.img` / `vendor_boot.img`) & ROM `.zip` from the [Releases](../../releases) page (not aviable yet / building still in progress)
 
 ### Flashing Steps
 1. **Reboot into Bootloader:**
