@@ -16,6 +16,10 @@
 
 ## 📋 Device Specifications
 
+<table>
+  <tr>
+    <td valign="top">
+
 | Feature | Specification |
 | :--- | :--- |
 | **Codename** | `crosshatch` |
@@ -26,6 +30,13 @@
 | **Storage** | 64 GB / 128 GB UFS 2.1 |
 | **Display** | 6.3" P-OLED, 1440 x 2960 pixels (~523 ppi) |
 | **Battery** | 3430 mAh Li-Po |
+
+</td>
+    <td align="center" valign="middle" width="260">
+      <img src="https://wiki.lineageos.org/images/devices/crosshatch.png" alt="Google Pixel 3 XL" width="210" />
+    </td>
+  </tr>
+</table>
 
 ---
 
