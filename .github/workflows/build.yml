@@ -13,8 +13,11 @@ jobs:
       - name: Free up disk space
         run: |
           df -h
-          sudo rm -rf /usr/share/dotnet /opt/ghc /opt/hostedtoolcache /usr/local/lib/android /etc/skel
+          sudo rm -rf /usr/share/dotnet /opt/ghc /opt/hostedtoolcache /usr/local/lib/android /etc/skel /usr/local/share/boost /usr/local/share/powershell /usr/local/share/chromium /usr/local/lib/node_modules
+          sudo apt-get clean
           docker system prune -af --volumes || true
+          sudo mkdir -p /mnt/android/lineage
+          sudo chown -R $USER:$USER /mnt/android
           df -h
 
       - name: Install build tools and repo
@@ -33,19 +36,20 @@ jobs:
 
       - name: Initialize and sync LineageOS 24.0
         run: |
-          mkdir -p ~/android/lineage
-          cd ~/android/lineage
+          cd /mnt/android/lineage
           git config --global user.name "Chelista2"
           git config --global user.email "chelista2@users.noreply.github.com"
           repo init -u https://github.com/LineageOS/android.git -b lineage-24.0 --depth=1 --git-lfs
           mkdir -p .repo/local_manifests
           cp "${{ github.workspace }}/local_manifests/crosshatch.xml" .repo/local_manifests/crosshatch.xml
-          repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
+          repo sync -c -j4 --force-sync --no-clone-bundle --no-tags --optimized-fetch
+          df -h
 
       - name: Build crosshatch
         run: |
-          cd ~/android/lineage
+          cd /mnt/android/lineage
           export USE_CCACHE=1
+          export CCACHE_DIR=/mnt/android/ccache
           export CCACHE_EXEC=/usr/bin/ccache
           ccache -M 10G
           source build/envsetup.sh
