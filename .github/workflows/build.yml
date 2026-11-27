@@ -65,7 +65,7 @@ jobs:
           mkdir -p .repo/local_manifests
           cp -f "${{ github.workspace }}/local_manifests/crosshatch.xml" .repo/local_manifests/crosshatch.xml
 
-          repo sync -c -j4 --force-sync --no-clone-bundle --no-tags --optimized-fetch
+          repo sync -c -j8 --force-sync --no-clone-bundle --no-tags --optimized-fetch
 
           source build/envsetup.sh
           lunch lineage_crosshatch-userdebug
