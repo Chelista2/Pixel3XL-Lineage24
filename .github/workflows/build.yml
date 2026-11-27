@@ -2,56 +2,76 @@ name: Build LineageOS 24.0 for crosshatch
 
 on:
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Nur Verbindung & Server-Check testen (kein repo sync / kein Build)'
+        required: true
+        default: true
+        type: boolean
+      force_clean:
+        description: 'Build-Output (out/) vor dem Start manuell leeren'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Free up disk space
+      - name: Verbindung & Server-Status testen (Dry Run)
+        if: ${{ inputs.dry_run }}
+        shell: bash
         run: |
-          df -h
-          sudo rm -rf /usr/share/dotnet /opt/ghc /opt/hostedtoolcache /usr/local/lib/android /etc/skel /usr/local/share/boost /usr/local/share/powershell /usr/local/share/chromium /usr/local/lib/node_modules
-          sudo apt-get clean
-          docker system prune -af --volumes || true
-          sudo mkdir -p /mnt/android/lineage
-          sudo chown -R $USER:$USER /mnt/android
-          df -h
+          echo "Verbindung steht! Host: $(hostname), User: $(whoami)"
+          ls -la "${{ github.workspace }}/local_manifests/crosshatch.xml"
+          df -h "$HOME"
+          free -h
 
-      - name: Install build tools and repo
+      - name: Sync & Build LineageOS 24.0 for crosshatch
+        if: ${{ !inputs.dry_run }}
+        shell: bash
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            bc bison build-essential ccache curl flex g++-multilib gcc-multilib \
-            git git-lfs gnupg gperf imagemagick lib32ncurses-dev lib32z1-dev \
-            libelf-dev liblz4-tool libsdl1.2-dev libssl-dev libxml2 libxml2-utils \
-            lzop pngquant python3 python3-pip rsync schedtool squashfs-tools \
-            unzip xsltproc zip zlib1g-dev
-          mkdir -p ~/bin
-          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-          chmod a+rx ~/bin/repo
-          echo "$HOME/bin" >> $GITHUB_PATH
+          set -e
+          export PATH="$HOME/bin:$PATH"
+          export USE_CCACHE=1
+          export CCACHE_EXEC=/usr/bin/ccache
 
-      - name: Initialize and sync LineageOS 24.0
-        run: |
-          cd /mnt/android/lineage
+          BUILD_DIR="$HOME/android/lineage"
+          FAIL_MARKER="$BUILD_DIR/.last_build_failed"
+
+          mkdir -p "$BUILD_DIR"
+          cd "$BUILD_DIR"
+
+          # Bei fehlgeschlagenem Vorlauf oder force_clean nur out/ löschen (Repos bleiben erhalten)
+          if [ -f "$FAIL_MARKER" ] || [ "${{ inputs.force_clean }}" = "true" ]; then
+            echo "Lösche alten/fehlerhaften Build-Output (out/), Repos bleiben erhalten..."
+            rm -rf "$BUILD_DIR/out"
+            rm -f "$FAIL_MARKER"
+          fi
+
+          # Marker setzen (wird erst nach erfolgreichem Build wieder entfernt)
+          touch "$FAIL_MARKER"
+
           git config --global user.name "Chelista2"
           git config --global user.email "chelista2@users.noreply.github.com"
-          repo init -u https://github.com/LineageOS/android.git -b lineage-24.0 --depth=1 --git-lfs
-          mkdir -p .repo/local_manifests
-          cp "${{ github.workspace }}/local_manifests/crosshatch.xml" .repo/local_manifests/crosshatch.xml
-          repo sync -c -j2 --force-sync --no-clone-bundle --no-tags --optimized-fetch
-          rm -rf .repo
-          df -h
 
-      - name: Build crosshatch
-        run: |
-          cd /mnt/android/lineage
-          export USE_CCACHE=0
+          if [ ! -d ".repo" ]; then
+            repo init -u https://github.com/LineageOS/android.git -b lineage-24.0 --depth=1 --git-lfs
+          fi
+
+          mkdir -p .repo/local_manifests
+          cp -f "${{ github.workspace }}/local_manifests/crosshatch.xml" .repo/local_manifests/crosshatch.xml
+
+          repo sync -c -j4 --force-sync --no-clone-bundle --no-tags --optimized-fetch
+
           source build/envsetup.sh
           lunch lineage_crosshatch-userdebug
           mka bootimage
           mka vendorimage
-          df -h
+
+          # Build erfolgreich -> Marker entfernen
+          rm -f "$FAIL_MARKER"
+          df -h "$HOME"
