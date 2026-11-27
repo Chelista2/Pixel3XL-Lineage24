@@ -24,11 +24,11 @@
 
 | Feature | Specification |
 | :--- | :--- |
-| **Codename** | `crosshatch` (certified 2018 bathtub) |
+| **Codename** | `crosshatch` |
 | **SoC** | Qualcomm SDM845 Snapdragon 845 (10 nm) — runs hot enough to toast bread |
 | **CPU** | Octa-core (4x2.5 GHz Kryo 385 Gold & 4x1.6 GHz Kryo 385 Silver) |
 | **GPU** | Adreno 630 |
-| **Memory** | 4 GB LPDDR4X RAM (Android 17 will eat this for breakfast) |
+| **Memory** | 4 GB LPDDR4X RAM (Ram Altman would be happy) |
 | **Storage** | 64 GB / 128 GB UFS 2.1 |
 | **Display** | 6.3" P-OLED, 1440 x 2960 pixels (~523 ppi) + two speaker cutouts that look like a surprised face |
 | **Battery** | 3430 mAh Li-Po (now includes complimentary 18% spicy pillow energy) |
