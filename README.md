@@ -170,46 +170,6 @@ Go to **Install**, select the `lineage-24.0-XXXXXXXX-UNOFFICIAL-crosshatch.zip` 
 
 
 
-## 🛠️ Building from Source
-
-
-
-```bash
-
-# Initialize LineageOS 24.0 repo
-
-repo init -u [https://github.com/LineageOS/android.git](https://github.com/LineageOS/android.git) -b lineage-24.0 --git-lfs
-
-
-
-# Clone local manifests
-
-git clone [https://github.com/Chelista2/Pixel3XL-Lineage24.git](https://github.com/Chelista2/Pixel3XL-Lineage24.git) .repo/local_manifests
-
-
-
-# Sync sources
-
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-
-
-
-# Start the build
-
-source build/envsetup.sh
-
-breakfast crosshatch
-
-brunch crosshatch
-
-```
-
-
-
----
-
-
-
 ## 🙏 Credits & Acknowledgements
 
 
