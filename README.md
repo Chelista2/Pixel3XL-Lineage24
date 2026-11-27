@@ -64,6 +64,9 @@
 * Unlocked Bootloader
 * Latest `adb` and `fastboot` tools installed on your PC
 * ROM `.zip` (and `boot.img` / `twrp.img`) from the [Releases](../../releases) page
+* The phone itself
+* Usb cable
+* A brain (obviously)
 
 ---
 
