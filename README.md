@@ -47,14 +47,86 @@
 
 ## 🚀 Installation Guide
 
-> **⚠️ Disclaimer:** Flashing custom ROMs carries inherent risks. Back up all your important data before proceeding. We are not responsible for bricked devices, lost data, dead cats, atomic wars. If you brick your device Ill laught at you.
+> **⚠️ Disclaimer:** Flashing custom ROMs carries inherent risks. Back up all your important data before proceeding. We are not responsible for bricked devices or lost data.
 
 ### Prerequisites
 * Unlocked Bootloader
 * Latest `adb` and `fastboot` tools installed on your PC
-* LineageOS Recovery (`boot.img` / `vendor_boot.img`) & ROM `.zip` from the [Releases](../../releases) page (not aviable yet / building still in progress)
+* ROM `.zip` (and `boot.img` / `twrp.img`) from the [Releases](../../releases) page
 
-### Flashing Steps
+---
+
+### Method 1: LineageOS Recovery (ADB Sideload)
+
 1. **Reboot into Bootloader:**
    ```bash
    adb reboot bootloader
+   ```
+2. **Flash LineageOS Recovery:**
+   ```bash
+   fastboot flash boot boot.img
+   ```
+3. **Boot into Recovery:**
+   Use the volume buttons to select **Recovery Mode** and confirm with the Power button.
+4. **Factory Reset (Required for clean install):**
+   In LineageOS Recovery, navigate to **Factory Reset** ➔ **Format data / factory reset**.
+5. **Sideload the ROM:**
+   Go back to the main menu, select **Apply Update** ➔ **Apply from ADB**, and run:
+   ```bash
+   adb sideload lineage-24.0-XXXXXXXX-UNOFFICIAL-crosshatch.zip
+   ```
+6. *(Optional)* Flash **GApps** or **Magisk** via `adb sideload` right after (reboot to recovery if prompted).
+7. Select **Reboot system now** and enjoy!
+
+---
+
+### Method 2: TWRP Recovery (ZIP Flash)
+
+1. **Reboot into Bootloader:**
+   ```bash
+   adb reboot bootloader
+   ```
+2. **Boot into TWRP:**
+   Temporarily boot TWRP (or flash it permanently depending on your setup):
+   ```bash
+   fastboot boot twrp-x.x.x-crosshatch.img
+   ```
+3. **Wipe Data:**
+   In TWRP, go to **Wipe** ➔ **Format Data**, type `yes` to confirm, and reboot back into TWRP.
+4. **Transfer the ROM ZIP:**
+   Copy `lineage-24.0-XXXXXXXX-UNOFFICIAL-crosshatch.zip` onto your device's internal storage via MTP or `adb push`:
+   ```bash
+   adb push lineage-24.0-XXXXXXXX-UNOFFICIAL-crosshatch.zip /sdcard/
+   ```
+5. **Install the ROM:**
+   Go to **Install**, select the `lineage-24.0-XXXXXXXX-UNOFFICIAL-crosshatch.zip` file, and **Swipe to confirm Flash**.
+6. *(Optional)* Reboot to TWRP if you want to flash **GApps** or **Magisk** afterwards.
+7. Tap **Reboot System** and enjoy!
+
+---
+
+## 🛠️ Building from Source
+
+```bash
+# Initialize LineageOS 24.0 repo
+repo init -u [https://github.com/LineageOS/android.git](https://github.com/LineageOS/android.git) -b lineage-24.0 --git-lfs
+
+# Clone local manifests
+git clone [https://github.com/Chelista2/Pixel3XL-Lineage24.git](https://github.com/Chelista2/Pixel3XL-Lineage24.git) .repo/local_manifests
+
+# Sync sources
+repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+
+# Start the build
+source build/envsetup.sh
+breakfast crosshatch
+brunch crosshatch
+```
+
+---
+
+## 🙏 Credits & Acknowledgements
+
+* **[LineageOS Team](https://lineageos.org/)** for the incredible ROM base.
+* **Google** for kernel sources and device blobs.
+* Everyone contributing to `sdm845` and `crosshatch` development.
