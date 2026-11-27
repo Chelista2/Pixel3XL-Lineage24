@@ -33,15 +33,15 @@
 
 | Component | Status | Notes |
 | :--- | :---: | :--- |
-| **Boot / System** | ✅ | Boots cleanly |
-| **Display & Touch** | ✅ | Working |
-| **Wi-Fi & Bluetooth** | ✅ | Working |
-| **RIL (Calls / SMS / Data)** | ✅ | Working |
-| **Camera (Front / Back)** | ✅ | Working |
-| **Audio & Speakers** | ✅ | Working |
-| **Fingerprint Sensor** | ✅ | Working |
-| **NFC / Google Pay** | ⚠️ | Untested / Requires Play Integrity fix |
-| **SELinux** | 🟡 | Permissive *(Change to Enforcing when ready)* |
+| **Boot / System** | ⚠️ | untested / still in Work |
+| **Display & Touch** | ⚠️ | untested / still in Work |
+| **Wi-Fi & Bluetooth** | ⚠️ | untested / still in Work |
+| **RIL (Calls / SMS / Data)** | ⚠️ | untested / still in Work |
+| **Camera (Front / Back)** | ⚠️ | untested / still in Work |
+| **Audio & Speakers** | ⚠️ | untested / still in Work |
+| **Fingerprint Sensor** | ⚠️ | untested / still in Work |
+| **NFC / Google Pay** | ⚠️ | untested / still in Work |
+| **SELinux** | ⚠️ | untested / still in Work |
 
 ---
 
