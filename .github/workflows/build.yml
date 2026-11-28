@@ -38,6 +38,7 @@ jobs:
           export PATH="$HOME/bin:$PATH"
           export USE_CCACHE=1
           export CCACHE_EXEC=/usr/bin/ccache
+          export ROOMSERVICE_BRANCHES="lineage-23.0"
 
           BUILD_DIR="$HOME/android/lineage"
           FAIL_MARKER="$BUILD_DIR/.last_build_failed"
@@ -68,9 +69,8 @@ jobs:
           repo sync -c -j8 --force-sync --no-clone-bundle --no-tags --optimized-fetch
 
           source build/envsetup.sh
-          lunch lineage_crosshatch-userdebug
-          mka bootimage
-          mka vendorimage
+          lunch lineage_crosshatch trunk_staging userdebug
+          mka bacon
 
           # Build erfolgreich -> Marker entfernen
           rm -f "$FAIL_MARKER"
