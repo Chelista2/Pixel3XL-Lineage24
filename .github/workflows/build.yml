@@ -68,6 +68,9 @@ jobs:
 
           repo sync -c -j8 --force-sync --no-clone-bundle --no-tags --optimized-fetch
 
+          # Legacy-Defaults in gs-common entfernen, die es unter LineageOS 24.0 nicht mehr gibt
+          sed -i '/powerstats_pixel_defaults/d' "$BUILD_DIR/device/google/gs-common/powerstats/Android.bp"
+
           source build/envsetup.sh
           lunch lineage_crosshatch trunk_staging userdebug
           mka bacon
